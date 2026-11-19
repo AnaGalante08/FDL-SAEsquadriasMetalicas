@@ -17,7 +17,6 @@ namespace SAEsquadrias.Api.Controllers
             _context = context;
         }
 
-        // POST: api/vendedores
         [HttpPost]
         public async Task<IActionResult> Criar([FromBody] VendedorDto req)
         {
@@ -26,7 +25,7 @@ namespace SAEsquadrias.Api.Controllers
 
             var email = req.Email.Trim().ToLower();
 
-            // Verifica se o e-mail já existe
+          
             var emailExiste = await _context.Vendedores
                 .AnyAsync(v => v.Email.ToLower() == email);
 
@@ -35,7 +34,7 @@ namespace SAEsquadrias.Api.Controllers
                 return Conflict(new { erro = "Já existe um vendedor com este e-mail." });
             }
 
-            // Mapeia os dados do DTO para o Model
+           
             var vendedor = new Vendedor
             {
                 Nome = req.Nome.Trim(),
@@ -49,18 +48,18 @@ namespace SAEsquadrias.Api.Controllers
             return CreatedAtAction(nameof(ObterPorId), new { id = vendedor.Id }, vendedor);
         }
 
-        // GET: api/vendedores (Usado para popular o select no front-end)
+     
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Vendedor>>> Listar()
         {
             var vendedores = await _context.Vendedores
-                .Where(v => v.Ativo) // Traz apenas os ativos
+                .Where(v => v.Ativo) 
                 .ToListAsync();
 
             return Ok(vendedores);
         }
 
-        // GET: api/vendedores/5
+      
         [HttpGet("{id}")]
         public async Task<ActionResult<Vendedor>> ObterPorId(int id)
         {
@@ -74,7 +73,7 @@ namespace SAEsquadrias.Api.Controllers
             return vendedor;
         }
 
-        // DELETE: api/vendedores/5 (Exclusão Lógica)
+      
         [HttpDelete("{id}")]
         public async Task<IActionResult> Desativar(int id)
         {

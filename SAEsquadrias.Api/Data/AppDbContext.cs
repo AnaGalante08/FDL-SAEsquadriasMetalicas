@@ -10,6 +10,9 @@ namespace SAEsquadrias.Api.Data
 
         public DbSet<Cliente> Clientes => Set<Cliente>();
         public DbSet<Vendedor> Vendedores => Set<Vendedor>();
+        public DbSet<Administrador> Administradores => Set<Administrador>();
+        public DbSet<Obra> Obras { get; set; }
+        public DbSet<ItemObra> ItensObras { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
