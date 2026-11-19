@@ -19,23 +19,27 @@ namespace SAEsquadrias.Api.Controllers
         [HttpPost]
         public IActionResult Cadastrar(CadastroUsuarioDto dto)
         {
-            // só o vendedor pode cadastrar
-            var quemCadastra = _context.Usuarios.FirstOrDefault(u => u.Id == dto.UsuarioLogadoId);
+            bool existeVendedor = _context.Usuarios.Any(u => u.Perfil == "VENDEDOR");
 
-            if (quemCadastra == null || quemCadastra.Perfil != "VENDEDOR")
+            if (!existeVendedor)
             {
-                return StatusCode(403, new { erro = "Só o vendedor pode cadastrar." });
+                
+                if (dto.Perfil != "VENDEDOR")
+                    return BadRequest(new { erro = "Cadastre primeiro um VENDEDOR." });
             }
-
-            if (dto.Perfil != "CLIENTE" && dto.Perfil != "EQUIPE_EXTERNA")
+            else
             {
-                return BadRequest(new { erro = "Perfil inválido. Use CLIENTE ou EQUIPE_EXTERNA." });
+                var quemCadastra = _context.Usuarios.FirstOrDefault(u => u.Id == dto.UsuarioLogadoId);
+
+                if (quemCadastra == null || quemCadastra.Perfil != "VENDEDOR")
+                    return StatusCode(403, new { erro = "Só o vendedor pode cadastrar." });
+
+                if (dto.Perfil != "VENDEDOR" && dto.Perfil != "CLIENTE" && dto.Perfil != "EQUIPE_EXTERNA")
+                    return BadRequest(new { erro = "Perfil inválido. Use VENDEDOR, CLIENTE ou EQUIPE_EXTERNA." });
             }
 
             if (_context.Usuarios.Any(u => u.Email == dto.Email))
-            {
                 return BadRequest(new { erro = "Já existe um usuário com esse e-mail." });
-            }
 
             var usuario = new Usuario
             {

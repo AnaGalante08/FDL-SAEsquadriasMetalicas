@@ -18,21 +18,21 @@ namespace SAEsquadrias.Api.Controllers
         [HttpPost("login")]
         public IActionResult Login(LoginDto dto)
         {
-            var usuario = _context.Usuarios.FirstOrDefault(u => u.Email == dto.Email && u.Senha == dto.Senha);
+            var usuario = _context.Usuarios
+                .FirstOrDefault(u => u.Email == dto.Email && u.Senha == dto.Senha);
 
             if (usuario == null)
-            {
-                return Unauthorized(new { erro = "E-mail ou senha incorretos." });
-            }
+                return Unauthorized(new { erro = "E-mail ou senha inválidos." });
 
-            var resposta = new LoginRespostaDto
+            if (usuario.Perfil != "VENDEDOR")
+                return StatusCode(403, new { erro = "Acesso permitido somente para vendedores." });
+
+            return Ok(new LoginRespostaDto
             {
                 Id = usuario.Id,
                 Nome = usuario.Nome,
                 Perfil = usuario.Perfil
-            };
-
-            return Ok(resposta);
+            });
         }
     }
 }

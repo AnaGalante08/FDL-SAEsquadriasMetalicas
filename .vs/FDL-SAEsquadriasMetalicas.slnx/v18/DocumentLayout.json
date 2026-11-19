@@ -3,8 +3,60 @@
   "WorkspaceRootPath": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|c:\\users\\42511170850\\source\\repos\\fdl-saesquadriasmetalicas\\saesquadrias.api\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|solutionrelative:saesquadrias.api\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|c:\\users\\42511170850\\source\\repos\\fdl-saesquadriasmetalicas\\saesquadrias.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|solutionrelative:saesquadrias.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|c:\\users\\42511170850\\source\\repos\\fdl-saesquadriasmetalicas\\saesquadrias.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|solutionrelative:saesquadrias.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|c:\\users\\42511170850\\source\\repos\\fdl-saesquadriasmetalicas\\saesquadrias.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|solutionrelative:saesquadrias.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|c:\\users\\42511170850\\source\\repos\\fdl-saesquadriasmetalicas\\saesquadrias.api\\dtos\\cadastrousuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|solutionrelative:saesquadrias.api\\dtos\\cadastrousuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|c:\\users\\42511170850\\source\\repos\\fdl-saesquadriasmetalicas\\saesquadrias.api\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|solutionrelative:saesquadrias.api\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|c:\\users\\42511170850\\source\\repos\\fdl-saesquadriasmetalicas\\saesquadrias.api\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|solutionrelative:saesquadrias.api\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|c:\\users\\42511170850\\source\\repos\\fdl-saesquadriasmetalicas\\saesquadrias.api\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|solutionrelative:saesquadrias.api\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|c:\\users\\42511170850\\source\\repos\\fdl-saesquadriasmetalicas\\saesquadrias.api\\dtos\\loginrespostadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|solutionrelative:saesquadrias.api\\dtos\\loginrespostadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|c:\\users\\42511170850\\source\\repos\\fdl-saesquadriasmetalicas\\saesquadrias.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|solutionrelative:saesquadrias.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|c:\\users\\42511170850\\source\\repos\\fdl-saesquadriasmetalicas\\saesquadrias.api\\models\\projeto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|solutionrelative:saesquadrias.api\\models\\projeto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|c:\\users\\42511170850\\source\\repos\\fdl-saesquadriasmetalicas\\saesquadrias.api\\migrations\\20261113201233_adicionarclienteseequipes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|solutionrelative:saesquadrias.api\\migrations\\20261113201233_adicionarclienteseequipes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|c:\\users\\42511170850\\source\\repos\\fdl-saesquadriasmetalicas\\saesquadrias.api\\saesquadrias.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|solutionrelative:saesquadrias.api\\saesquadrias.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|c:\\users\\42511170850\\source\\repos\\fdl-saesquadriasmetalicas\\saesquadrias.api\\migrations\\20261113172314_criartabelausuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C9942A8-B0FC-96C5-137A-870229D15AD2}|SAEsquadrias.Api\\SAEsquadrias.Api.csproj|solutionrelative:saesquadrias.api\\migrations\\20261113172314_criartabelausuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,20 +66,183 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "LoginRespostaDto.cs",
+              "DocumentMoniker": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\DTOs\\LoginRespostaDto.cs",
+              "RelativeDocumentMoniker": "SAEsquadrias.Api\\DTOs\\LoginRespostaDto.cs",
+              "ToolTip": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\DTOs\\LoginRespostaDto.cs",
+              "RelativeToolTip": "SAEsquadrias.Api\\DTOs\\LoginRespostaDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-13T12:07:06.31Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "SAEsquadrias.Api\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "SAEsquadrias.Api\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-13T13:09:55.539Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UsuariosController.cs",
+              "DocumentMoniker": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Controllers\\UsuariosController.cs",
+              "RelativeDocumentMoniker": "SAEsquadrias.Api\\Controllers\\UsuariosController.cs",
+              "ToolTip": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Controllers\\UsuariosController.cs",
+              "RelativeToolTip": "SAEsquadrias.Api\\Controllers\\UsuariosController.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAwwCcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-13T19:47:09.636Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LoginDto.cs",
+              "DocumentMoniker": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\DTOs\\LoginDto.cs",
+              "RelativeDocumentMoniker": "SAEsquadrias.Api\\DTOs\\LoginDto.cs",
+              "ToolTip": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\DTOs\\LoginDto.cs",
+              "RelativeToolTip": "SAEsquadrias.Api\\DTOs\\LoginDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-13T12:02:08.041Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "Projeto.cs",
               "DocumentMoniker": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Models\\Projeto.cs",
               "RelativeDocumentMoniker": "SAEsquadrias.Api\\Models\\Projeto.cs",
               "ToolTip": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Models\\Projeto.cs",
               "RelativeToolTip": "SAEsquadrias.Api\\Models\\Projeto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-13T10:58:51.808Z",
+              "WhenOpened": "2026-11-13T10:58:51.808Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "SAEsquadrias.Api\\appsettings.json",
+              "ToolTip": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\appsettings.json",
+              "RelativeToolTip": "SAEsquadrias.Api\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-11-13T13:16:28.242Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "20261113201233_AdicionarClientesEEquipes.cs",
+              "DocumentMoniker": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Migrations\\20261113201233_AdicionarClientesEEquipes.cs",
+              "RelativeDocumentMoniker": "SAEsquadrias.Api\\Migrations\\20261113201233_AdicionarClientesEEquipes.cs",
+              "ToolTip": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Migrations\\20261113201233_AdicionarClientesEEquipes.cs",
+              "RelativeToolTip": "SAEsquadrias.Api\\Migrations\\20261113201233_AdicionarClientesEEquipes.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-13T20:12:33.636Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Program.cs",
+              "RelativeDocumentMoniker": "SAEsquadrias.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Program.cs",
+              "RelativeToolTip": "SAEsquadrias.Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-13T12:23:28.058Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Models\\Usuario.cs",
+              "RelativeDocumentMoniker": "SAEsquadrias.Api\\Models\\Usuario.cs",
+              "ToolTip": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Models\\Usuario.cs",
+              "RelativeToolTip": "SAEsquadrias.Api\\Models\\Usuario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-13T11:51:15.855Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "SAEsquadrias.Api\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "SAEsquadrias.Api\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-13T12:10:10.975Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CadastroUsuarioDto.cs",
+              "DocumentMoniker": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\DTOs\\CadastroUsuarioDto.cs",
+              "RelativeDocumentMoniker": "SAEsquadrias.Api\\DTOs\\CadastroUsuarioDto.cs",
+              "ToolTip": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\DTOs\\CadastroUsuarioDto.cs",
+              "RelativeToolTip": "SAEsquadrias.Api\\DTOs\\CadastroUsuarioDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-19T13:33:43.603Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Services\\TokenService.cs",
+              "RelativeDocumentMoniker": "SAEsquadrias.Api\\Services\\TokenService.cs",
+              "ToolTip": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Services\\TokenService.cs",
+              "RelativeToolTip": "SAEsquadrias.Api\\Services\\TokenService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-19T16:51:22.884Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "SAEsquadrias.Api.csproj",
+              "DocumentMoniker": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\SAEsquadrias.Api.csproj",
+              "RelativeDocumentMoniker": "SAEsquadrias.Api\\SAEsquadrias.Api.csproj",
+              "ToolTip": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\SAEsquadrias.Api.csproj",
+              "RelativeToolTip": "SAEsquadrias.Api\\SAEsquadrias.Api.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-11-13T11:59:48.362Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "20261113172314_CriarTabelaUsuarios.cs",
+              "DocumentMoniker": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Migrations\\20261113172314_CriarTabelaUsuarios.cs",
+              "RelativeDocumentMoniker": "SAEsquadrias.Api\\Migrations\\20261113172314_CriarTabelaUsuarios.cs",
+              "ToolTip": "C:\\Users\\42511170850\\source\\repos\\FDL-SAEsquadriasMetalicas\\SAEsquadrias.Api\\Migrations\\20261113172314_CriarTabelaUsuarios.cs",
+              "RelativeToolTip": "SAEsquadrias.Api\\Migrations\\20261113172314_CriarTabelaUsuarios.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-13T17:23:15.133Z"
             }
           ]
         }
