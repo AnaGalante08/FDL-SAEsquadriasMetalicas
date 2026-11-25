@@ -12,8 +12,8 @@ using SAEsquadrias.Api.Data;
 namespace SAEsquadrias.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20261113202206_Ora")]
-    partial class Ora
+    [Migration("20261125141345_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,6 +101,24 @@ namespace SAEsquadrias.Api.Migrations
                             Nome = "Maria Souza",
                             Telefone = "14988888888"
                         });
+                });
+
+            modelBuilder.Entity("SAEsquadrias.Api.Models.Equipe", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Equipes");
                 });
 
             modelBuilder.Entity("SAEsquadrias.Api.Models.ItemObra", b =>
@@ -202,6 +220,69 @@ namespace SAEsquadrias.Api.Migrations
                     b.ToTable("Obras");
                 });
 
+            modelBuilder.Entity("SAEsquadrias.Api.Models.Pendencia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ObraId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VendedorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ObraId");
+
+                    b.HasIndex("VendedorId");
+
+                    b.ToTable("Pendencias");
+                });
+
+            modelBuilder.Entity("SAEsquadrias.Api.Models.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Perfil")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuarios");
+                });
+
             modelBuilder.Entity("SAEsquadrias.Api.Models.Vendedor", b =>
                 {
                     b.Property<int>("Id")
@@ -254,6 +335,25 @@ namespace SAEsquadrias.Api.Migrations
                         .IsRequired();
 
                     b.Navigation("Cliente");
+
+                    b.Navigation("Vendedor");
+                });
+
+            modelBuilder.Entity("SAEsquadrias.Api.Models.Pendencia", b =>
+                {
+                    b.HasOne("SAEsquadrias.Api.Models.Obra", "Obra")
+                        .WithMany()
+                        .HasForeignKey("ObraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SAEsquadrias.Api.Models.Vendedor", "Vendedor")
+                        .WithMany()
+                        .HasForeignKey("VendedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Obra");
 
                     b.Navigation("Vendedor");
                 });
