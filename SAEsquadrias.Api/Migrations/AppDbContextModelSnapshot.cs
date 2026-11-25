@@ -214,7 +214,7 @@ namespace SAEsquadrias.Api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProjetoId")
+                    b.Property<int>("ObraId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
@@ -226,14 +226,14 @@ namespace SAEsquadrias.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjetoId");
+                    b.HasIndex("ObraId");
 
                     b.HasIndex("VendedorId");
 
                     b.ToTable("Pendencias");
                 });
 
-            modelBuilder.Entity("SAEsquadrias.Api.Models.Projeto", b =>
+            modelBuilder.Entity("SAEsquadrias.Api.Models.RegistroCampo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -241,9 +241,55 @@ namespace SAEsquadrias.Api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Fotos")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ObraId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Observacoes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Projeto");
+                    b.ToTable("RegistrosCampo");
+                });
+
+            modelBuilder.Entity("SAEsquadrias.Api.Models.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Perfil")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("SAEsquadrias.Api.Models.Vendedor", b =>
@@ -304,9 +350,9 @@ namespace SAEsquadrias.Api.Migrations
 
             modelBuilder.Entity("SAEsquadrias.Api.Models.Pendencia", b =>
                 {
-                    b.HasOne("SAEsquadrias.Api.Models.Projeto", "Projeto")
+                    b.HasOne("SAEsquadrias.Api.Models.Obra", "Obra")
                         .WithMany()
-                        .HasForeignKey("ProjetoId")
+                        .HasForeignKey("ObraId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -316,7 +362,7 @@ namespace SAEsquadrias.Api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Projeto");
+                    b.Navigation("Obra");
 
                     b.Navigation("Vendedor");
                 });

@@ -13,7 +13,7 @@
     {
         public string Descricao { get; set; } = string.Empty;
         public string Status { get; set; } = "Aberta";
-        public int ProjetoId { get; set; }
+        public int ObraId { get; set; }
         public int VendedorId { get; set; }
     }
 }

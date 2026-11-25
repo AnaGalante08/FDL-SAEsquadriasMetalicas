@@ -17,11 +17,11 @@ namespace SAEsquadrias.Api.Models
         public DateTime DataCriacao { get; set; } = DateTime.Now;
 
         
-        [Required]
-        public int ProjetoId { get; set; }
+       [Required]
+        public int ObraId { get; set; }
 
-        [ForeignKey("ProjetoId")]
-        public Projeto? Projeto { get; set; }
+        [ForeignKey("ObraId")]
+        public Obra? Obra { get; set; }
 
         [Required]
         public int VendedorId { get; set; }
