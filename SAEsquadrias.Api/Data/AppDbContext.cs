@@ -7,12 +7,37 @@ namespace SAEsquadrias.Api.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<Usuario> Usuarios { get; set; }
-        
+
+        public DbSet<Cliente> Clientes => Set<Cliente>();
+        public DbSet<Vendedor> Vendedores => Set<Vendedor>();
+        public DbSet<Administrador> Administradores => Set<Administrador>();
+        public DbSet<Obra> Obras { get; set; }
+        public DbSet<ItemObra> ItensObras { get; set; }
+        public DbSet<Pendencia> Pendencias { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
-            mb.Entity<Usuario>().HasIndex(u => u.Email).IsUnique();
+            mb.Entity<Cliente>().HasIndex(x => x.Nome).IsUnique();
+
+
+
+            mb.Entity<Cliente>().HasData(
+     new Cliente
+     {
+         Id = 1,
+         Nome = "Construtora Alfa",
+         Email = "contato@alfa.com",
+         Telefone = "14999999999"
+     },
+     new Cliente
+     {
+         Id = 2,
+         Nome = "Maria Souza",
+         Email = "maria@email.com",
+         Telefone = "14988888888"
+     }
+ );
+
         }
     }
 }
