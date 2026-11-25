@@ -56,3 +56,5 @@ CodeCoverage/
 TestResult.xml
 nunit-*.xml
 /.vs/FDL-SAEsquadriasMetalicas.slnx/FileContentIndex
+*.v2
+*.bin
