@@ -199,6 +199,53 @@ namespace SAEsquadrias.Api.Migrations
                     b.ToTable("Obras");
                 });
 
+            modelBuilder.Entity("SAEsquadrias.Api.Models.Pendencia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProjetoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VendedorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjetoId");
+
+                    b.HasIndex("VendedorId");
+
+                    b.ToTable("Pendencias");
+                });
+
+            modelBuilder.Entity("SAEsquadrias.Api.Models.Projeto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Projeto");
+                });
+
             modelBuilder.Entity("SAEsquadrias.Api.Models.Vendedor", b =>
                 {
                     b.Property<int>("Id")
@@ -251,6 +298,25 @@ namespace SAEsquadrias.Api.Migrations
                         .IsRequired();
 
                     b.Navigation("Cliente");
+
+                    b.Navigation("Vendedor");
+                });
+
+            modelBuilder.Entity("SAEsquadrias.Api.Models.Pendencia", b =>
+                {
+                    b.HasOne("SAEsquadrias.Api.Models.Projeto", "Projeto")
+                        .WithMany()
+                        .HasForeignKey("ProjetoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SAEsquadrias.Api.Models.Vendedor", "Vendedor")
+                        .WithMany()
+                        .HasForeignKey("VendedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Projeto");
 
                     b.Navigation("Vendedor");
                 });
