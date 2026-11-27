@@ -9,5 +9,13 @@ namespace SAEsquadrias.Api.Models
         [MaxLength(120)]
         public string Nome { get; set; } = string.Empty;
     }
-    public class Equipe : Cadastro { }
+    public class Equipe : Cadastro 
+    {
+        [Required]
+        [MaxLength(120)]
+        public string Responsavel { get; set; } = string.Empty;
+
+        [Required]
+        public int QuantidadeIntegrantes { get; set; }
+    }
 }
