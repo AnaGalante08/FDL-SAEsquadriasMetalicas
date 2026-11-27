@@ -18,6 +18,10 @@ namespace SAEsquadrias.Api.Data
         public DbSet<Usuario>   Usuarios { get; set; }
         public DbSet<ListaObra> ListaObras { get; set; }
 
+        public DbSet<RegistroCampo> RegistrosCampo => Set<RegistroCampo>();
+
+        public DbSet<Usuario>Usuarios => Set<Usuario>();
+
         protected override void OnModelCreating(ModelBuilder mb)
         {
             mb.Entity<Cliente>().HasIndex(x => x.Nome).IsUnique();

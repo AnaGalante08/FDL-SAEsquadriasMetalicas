@@ -288,7 +288,7 @@ namespace SAEsquadrias.Api.Migrations
                     b.ToTable("Pendencias");
                 });
 
-            modelBuilder.Entity("SAEsquadrias.Api.Models.Usuario", b =>
+            modelBuilder.Entity("SAEsquadrias.Api.Models.Projeto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

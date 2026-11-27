@@ -16,8 +16,8 @@ namespace SAEsquadrias.Api.Models
 
         public DateTime DataCriacao { get; set; } = DateTime.Now;
 
-
-        [Required]
+        
+       [Required]
         public int ObraId { get; set; }
 
         [ForeignKey("ObraId")]
@@ -25,7 +25,6 @@ namespace SAEsquadrias.Api.Models
 
         [Required]
         public int VendedorId { get; set; }
-
 
         [ForeignKey("VendedorId")]
         public Vendedor? Vendedor { get; set; }
