@@ -30,7 +30,7 @@ namespace SAEsquadrias.Api.Controllers
             {
                 busca = busca.ToLower();
                 query = query.Where(p =>
-                    p.ProjetoId.ToString().Contains(busca) ||
+                    p.ObraId.ToString().Contains(busca) || 
                     p.Descricao.ToLower().Contains(busca)
        
                 );
@@ -39,7 +39,7 @@ namespace SAEsquadrias.Api.Controllers
             var pendencias = await query.Select(p => new PendenciaDto
             {
                 Id = p.Id,
-                CodigoProjeto = $"#{p.ProjetoId:D4}", 
+                CodigoProjeto = $"#{p.ObraId:D4}", 
                 Descricao = p.Descricao,
                 ResponsavelNome = p.Vendedor != null ? p.Vendedor.Nome : "Vendedor",
                 Status = p.Status
@@ -70,7 +70,7 @@ namespace SAEsquadrias.Api.Controllers
             {
                 Descricao = dto.Descricao,
                 Status = dto.Status,
-                ProjetoId = dto.ProjetoId,
+                ObraId = dto.ObraId,
                 VendedorId = dto.VendedorId
             };
 

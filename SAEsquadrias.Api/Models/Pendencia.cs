@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SAEsquadrias.Api.Models
@@ -10,17 +10,16 @@ namespace SAEsquadrias.Api.Models
 
         [Required]
         public string Descricao { get; set; } = string.Empty;
-  
+
         [Required]
         public string Status { get; set; } = "Aberta";
 
         public DateTime DataCriacao { get; set; } = DateTime.Now;
 
-        
         [Required]
-        public int ProjetoId { get; set; }
+        public int ObraId { get; set; }
 
-        [ForeignKey("ProjetoId")]
+        [ForeignKey("ObraId")]
         public Obra? Obra { get; set; }
 
         [Required]

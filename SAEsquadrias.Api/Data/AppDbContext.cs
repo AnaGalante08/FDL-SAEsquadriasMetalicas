@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SAEsquadrias.Api.Models;
 
 namespace SAEsquadrias.Api.Data
@@ -17,6 +17,9 @@ namespace SAEsquadrias.Api.Data
         public DbSet<Pendencia> Pendencias { get; set; }
         public DbSet<Usuario> Usuarios => Set<Usuario>();
         public DbSet<EtapaObra> EtapasObra { get; set; }
+        public DbSet<Equipe> Equipes { get; set; }
+        public DbSet<ListaObra> ListaObras { get; set; }
+        public DbSet<RegistroCampo> RegistrosCampo => Set<RegistroCampo>();
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
