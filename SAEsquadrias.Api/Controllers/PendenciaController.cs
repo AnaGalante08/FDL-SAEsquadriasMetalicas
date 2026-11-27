@@ -39,7 +39,7 @@ namespace SAEsquadrias.Api.Controllers
             var pendencias = await query.Select(p => new PendenciaDto
             {
                 Id = p.Id,
-                CodigoProjeto = $"#{p.ObraId:D4}", 
+                CodigoObra = $"#{p.ObraId:D4}", 
                 Descricao = p.Descricao,
                 ResponsavelNome = p.Vendedor != null ? p.Vendedor.Nome : "Vendedor",
                 Status = p.Status
