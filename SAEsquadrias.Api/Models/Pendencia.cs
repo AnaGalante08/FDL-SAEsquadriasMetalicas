@@ -21,7 +21,7 @@ namespace SAEsquadrias.Api.Models
         public int ProjetoId { get; set; }
 
         [ForeignKey("ProjetoId")]
-        public Projeto? Projeto { get; set; }
+        public Obra? Obra { get; set; }
 
         [Required]
         public int VendedorId { get; set; }

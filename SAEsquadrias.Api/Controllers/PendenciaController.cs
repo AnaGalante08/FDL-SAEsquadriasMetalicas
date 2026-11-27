@@ -21,7 +21,7 @@ namespace SAEsquadrias.Api.Controllers
         public async Task<ActionResult<IEnumerable<PendenciaDto>>> GetPendencias([FromQuery] string? busca)
         {
             var query = _context.Pendencias
-                .Include(p => p.Projeto)
+                .Include(p => p.Obra)
 
                 .Include(p => p.Vendedor)
                 .AsQueryable();
@@ -53,7 +53,7 @@ namespace SAEsquadrias.Api.Controllers
         public async Task<ActionResult<Pendencia>> GetPendencia(int id)
         {
             var pendencia = await _context.Pendencias
-                .Include(p => p.Projeto)
+                .Include(p => p.Obra)
                 .Include(p => p.Vendedor)
                 .FirstOrDefaultAsync(p => p.Id == id);
 

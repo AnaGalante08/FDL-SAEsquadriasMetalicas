@@ -47,7 +47,7 @@ namespace SAEsquadrias.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Administradores");
+                    b.ToTable("Administradores", (string)null);
                 });
 
             modelBuilder.Entity("SAEsquadrias.Api.Models.Cliente", b =>
@@ -79,7 +79,7 @@ namespace SAEsquadrias.Api.Migrations
                     b.HasIndex("Nome")
                         .IsUnique();
 
-                    b.ToTable("Clientes");
+                    b.ToTable("Clientes", (string)null);
 
                     b.HasData(
                         new
@@ -129,7 +129,7 @@ namespace SAEsquadrias.Api.Migrations
 
                     b.HasIndex("ObraId");
 
-                    b.ToTable("ItensObras");
+                    b.ToTable("ItensObras", (string)null);
                 });
 
             modelBuilder.Entity("SAEsquadrias.Api.Models.Obra", b =>
@@ -196,7 +196,7 @@ namespace SAEsquadrias.Api.Migrations
 
                     b.HasIndex("VendedorId");
 
-                    b.ToTable("Obras");
+                    b.ToTable("Obras", (string)null);
                 });
 
             modelBuilder.Entity("SAEsquadrias.Api.Models.Pendencia", b =>
@@ -230,7 +230,7 @@ namespace SAEsquadrias.Api.Migrations
 
                     b.HasIndex("VendedorId");
 
-                    b.ToTable("Pendencias");
+                    b.ToTable("Pendencias", (string)null);
                 });
 
             modelBuilder.Entity("SAEsquadrias.Api.Models.Projeto", b =>
@@ -243,7 +243,7 @@ namespace SAEsquadrias.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Projeto");
+                    b.ToTable("Projeto", (string)null);
                 });
 
             modelBuilder.Entity("SAEsquadrias.Api.Models.Vendedor", b =>
@@ -271,7 +271,7 @@ namespace SAEsquadrias.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vendedores");
+                    b.ToTable("Vendedores", (string)null);
                 });
 
             modelBuilder.Entity("SAEsquadrias.Api.Models.ItemObra", b =>
