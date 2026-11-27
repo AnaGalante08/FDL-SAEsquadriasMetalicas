@@ -6,7 +6,7 @@
       </div>
 
       <nav class="sidebar-nav">
-        <button type="button" class="nav-item active" title="Início">
+        <button type="button" class="nav-item" title="Início" @click="irPara('/')">
           <Home :size="20" />
         </button>
 
@@ -14,7 +14,7 @@
           <Calendar :size="20" />
         </button>
 
-        <button type="button" class="nav-item" title="Obras e Serviços">
+        <button type="button" class="nav-item active" title="Obras e Produtos">
           <Wrench :size="20" />
         </button>
 
@@ -33,207 +33,84 @@
     </aside>
 
     <main class="main-content">
-      <h1 class="page-title">Cadastro de Obras</h1>
+      <header class="page-header">
+        <h1 class="page-title">Cadastro de Produtos</h1>
+        <p class="page-subtitle">Preencha as informações do produto para cadastrá-lo no sistema</p>
+      </header>
 
-      <form @submit.prevent="cadastrarObra" class="form-wrapper">
+      <form @submit.prevent="cadastrarProduto" class="form-wrapper">
         <div class="form-scroll-area">
-          <section class="form-section">
-            <div class="section-header">
-              <h2 class="section-title active-underline">Endereço da Obra</h2>
-              <div class="section-line"></div>
-            </div>
+          <div class="form-group">
+            <label for="nome-produto">Nome do produto</label>
+            <input
+              id="nome-produto"
+              v-model="form.nome"
+              type="text"
+              placeholder="Ex: Janela de alumínio"
+              required
+            />
+          </div>
 
-            <div class="grid-row-4">
+          <div class="form-group mt-4">
+            <label for="descricao-produto">Descrição</label>
+            <textarea
+              id="descricao-produto"
+              v-model="form.descricao"
+              rows="4"
+              placeholder="Descreva as características do produto..."
+            ></textarea>
+          </div>
+
+          <section class="measures-section mt-4">
+            <h2 class="section-label">Medidas</h2>
+
+            <div class="grid-row-2">
               <div class="form-group">
-                <label>Cep *</label>
-                <div class="input-with-icon">
-                  <input
-                    v-model="form.cep"
-                    type="text"
-                    maxlength="9"
-                    placeholder="Ex. 17500-000"
-                    required
-                  />
-                  <button
-                    type="button"
-                    class="icon-btn"
-                    @click="buscarCep()"
-                    :disabled="buscandoCep"
-                    title="Buscar CEP"
-                  >
-                    <Search :size="16" color="#9CA3AF" />
-                  </button>
-                </div>
+                <label for="largura">Largura</label>
+                <input id="largura" v-model="form.largura" type="text" placeholder="Ex: 100 cm" />
               </div>
 
               <div class="form-group">
-                <label>Rua *</label>
-                <input v-model="form.rua" type="text" placeholder="Ex. Rua Bela Vista.." required />
-              </div>
-
-              <div class="form-group">
-                <label>Número *</label>
-                <input v-model="form.numero" type="text" placeholder="Ex. 123" required />
-              </div>
-
-              <div class="form-group">
-                <label>Complemento</label>
-                <input v-model="form.complemento" type="text" placeholder="Ex. Apto 10" />
+                <label for="profundidade">Profundidade</label>
+                <input
+                  id="profundidade"
+                  v-model="form.profundidade"
+                  type="text"
+                  placeholder="Ex: 5 cm"
+                />
               </div>
             </div>
 
-            <div class="grid-row-3 mt-4">
+            <div class="grid-row-2 mt-3">
               <div class="form-group">
-                <label>Bairro *</label>
-                <input v-model="form.bairro" type="text" placeholder="Ex. Centro" required />
+                <label for="altura">Altura</label>
+                <input id="altura" v-model="form.altura" type="text" placeholder="Ex: 120 cm" />
               </div>
 
               <div class="form-group">
-                <label>Cidade *</label>
-                <input v-model="form.cidade" type="text" placeholder="Ex. Marília" required />
-              </div>
-
-              <div class="form-group">
-                <label>Estado *</label>
-                <select v-model="form.estado" required>
-                  <option value="" disabled>Selecionar seu Estado</option>
-                  <option v-for="uf in estados" :key="uf" :value="uf">{{ uf }}</option>
-                </select>
+                <label for="cor">Cor</label>
+                <input id="cor" v-model="form.cor" type="text" placeholder="Ex: Branco" />
               </div>
             </div>
           </section>
 
-          <section class="form-section">
-            <div class="section-header">
-              <h2 class="section-title">Informações da Obra</h2>
-              <div class="section-line"></div>
+          <div class="form-group mt-4">
+            <label for="quantidade">Quantidade necessária</label>
+            <div class="input-with-suffix">
+              <input
+                id="quantidade"
+                v-model.number="form.quantidadeNecessaria"
+                type="number"
+                min="1"
+                placeholder="Ex: 25"
+                required
+              />
+              <span class="input-suffix">unidades</span>
             </div>
-
-            <div class="grid-row-3">
-              <div class="form-group">
-                <label>Cliente *</label>
-                <div class="select-with-action">
-                  <select v-model="form.clienteId" required>
-                    <option value="" disabled>Selecione o Cliente</option>
-                    <option v-for="cli in clientes" :key="cli.id" :value="cli.id">
-                      {{ cli.nome }}
-                    </option>
-                  </select>
-                  <button type="button" class="btn-outline-blue" @click="abrirModal('cliente')">
-                    + Cliente
-                  </button>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Vendedor *</label>
-                <div class="select-with-action">
-                  <select v-model="form.vendedorId" required>
-                    <option value="" disabled>Selecione o Vendedor</option>
-                    <option v-for="vend in vendedores" :key="vend.id" :value="vend.id">
-                      {{ vend.nome }}
-                    </option>
-                  </select>
-                  <button type="button" class="btn-outline-blue" @click="abrirModal('vendedor')">
-                    + Vendedor
-                  </button>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Equipe *</label>
-                <div class="select-with-action">
-                  <select v-model="form.equipeId" required>
-                    <option value="" disabled>Selecione a Equipe</option>
-                    <option v-for="eq in equipes" :key="eq.id" :value="eq.id">
-                      {{ eq.nome }}
-                    </option>
-                  </select>
-                  <button type="button" class="btn-outline-blue" @click="abrirModal('equipe')">
-                    + Equipe
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="grid-row-prazo-status mt-4">
-              <div class="form-group">
-                <label>Prazo *</label>
-                <div class="input-with-left-icon">
-                  <Calendar :size="16" color="#9CA3AF" class="left-icon" />
-                  <input v-model="form.prazo" type="date" required />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Status *</label>
-                <select v-model="form.status" required>
-                  <option value="Andamento">Andamento</option>
-                  <option value="Pendente">Pendente</option>
-                  <option value="Concluído">Concluído</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group mt-4">
-              <label>Observações</label>
-              <div class="textarea-wrapper">
-                <Calendar :size="16" color="#9CA3AF" class="textarea-icon" />
-                <textarea
-                  v-model="form.observacoes"
-                  rows="2"
-                  placeholder="Observações gerais da obra..."
-                ></textarea>
-              </div>
-            </div>
-          </section>
-
-          <section class="form-section">
-            <div class="section-header">
-              <h2 class="section-title">Produtos utilizados</h2>
-              <div class="section-line"></div>
-              <button type="button" class="btn-primary-blue ml-4" @click="adicionarProduto">
-                + Adicionar Produto
-              </button>
-            </div>
-
-            <div class="table-container">
-              <table class="products-table">
-                <thead>
-                  <tr>
-                    <th>Produto</th>
-                    <th class="text-center">Quantidade</th>
-                    <th class="text-center">Medidas</th>
-                    <th>Observações</th>
-                    <th class="text-center">Ações</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="item in produtosAtivos" :key="item.id">
-                    <td>{{ item.nome }}</td>
-                    <td class="text-center">{{ item.quantidade }}</td>
-                    <td class="text-center">{{ item.medidas }}</td>
-                    <td>{{ item.observacoes }}</td>
-                    <td class="text-center actions-cell">
-                      <button type="button" class="action-edit" @click="editarProduto(item.id)">
-                        Editar
-                      </button>
-                      <button
-                        type="button"
-                        class="action-delete"
-                        @click="desativarProduto(item.id)"
-                      >
-                        Excluir
-                      </button>
-                    </td>
-                  </tr>
-                  <tr v-if="produtosAtivos.length === 0">
-                    <td colspan="5" class="empty-row">Nenhum produto adicionado.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
+            <span class="helper-text">
+              informe a quantidade de unidades necessárias deste produto.
+            </span>
+          </div>
         </div>
 
         <div class="form-footer">
@@ -246,301 +123,89 @@
         </div>
       </form>
     </main>
-
-    <ModalCadastroCliente
-      :is-open="modalClienteAberto"
-      @close="modalClienteAberto = false"
-      @saved="aoSalvarCliente"
-    />
-
-    <ModalCadastroVendedor
-      :is-open="modalVendedorAberto"
-      @close="modalVendedorAberto = false"
-      @saved="aoSalvarVendedor"
-    />
-
-    <ModalCadastroEquipe
-      :is-open="modalEquipeAberto"
-      @close="modalEquipeAberto = false"
-      @saved="aoSalvarEquipe"
-    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, computed, watch, onMounted } from 'vue'
-import { Home, Calendar, Wrench, ClipboardList, Users, FileText, Search } from 'lucide-vue-next'
-import ModalCadastroCliente from '@/components/ModalCadastroCliente.vue'
-import ModalCadastroVendedor from '@/components/ModalCadastroVendedor.vue'
-import ModalCadastroEquipe from '@/components/ModalCadastroEquipe.vue'
+import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { Home, Calendar, Wrench, ClipboardList, Users, FileText } from 'lucide-vue-next'
 
-const API_URL = 'http://localhost:5006/api'
+const STORAGE_PRODUTOS_KEY = 'sa_esquadrias_catalogo_produtos'
 
-interface SelectOption {
-  id: number | string
-  nome: string
-}
-
-interface ProdutoItem {
-  id: number
-  nome: string
-  quantidade: number
-  medidas: string
-  observacoes: string
-  ativo: boolean
-}
-
-interface ObraForm {
-  cep: string
-  rua: string
-  numero: string
-  complemento: string
-  bairro: string
-  cidade: string
-  estado: string
-  clienteId: number | string
-  vendedorId: number | string
-  equipeId: number | string
-  prazo: string
-  status: string
-  observacoes: string
-}
-
-const estados = [
-  'AC',
-  'AL',
-  'AP',
-  'AM',
-  'BA',
-  'CE',
-  'DF',
-  'ES',
-  'GO',
-  'MA',
-  'MT',
-  'MS',
-  'MG',
-  'PA',
-  'PB',
-  'PR',
-  'PE',
-  'PI',
-  'RJ',
-  'RN',
-  'RS',
-  'RO',
-  'RR',
-  'SC',
-  'SP',
-  'SE',
-  'TO',
-]
-
-const buscandoCep = ref(false)
+const router = useRouter()
 const salvando = ref(false)
-const modalClienteAberto = ref(false)
-const modalVendedorAberto = ref(false)
-const modalEquipeAberto = ref(false)
 
-const clientes = ref<SelectOption[]>([])
-const vendedores = ref<SelectOption[]>([])
-const equipes = ref<SelectOption[]>([])
-
-const form = reactive<ObraForm>({
-  cep: '',
-  rua: '',
-  numero: '',
-  complemento: '',
-  bairro: '',
-  cidade: '',
-  estado: '',
-  clienteId: '',
-  vendedorId: '',
-  equipeId: '',
-  prazo: '',
-  status: 'Andamento',
-  observacoes: '',
+const form = reactive({
+  nome: '',
+  descricao: '',
+  largura: '',
+  profundidade: '',
+  altura: '',
+  cor: '',
+  quantidadeNecessaria: null as number | null,
 })
 
-const produtos = ref<ProdutoItem[]>([])
-
-const produtosAtivos = computed(() => produtos.value.filter((item) => item.ativo))
-
-watch(
-  () => form.cep,
-  (novoCep) => {
-    const cepLimpo = novoCep.replace(/\D/g, '')
-
-    if (cepLimpo.length <= 8) {
-      const formatado = cepLimpo.replace(/^(\d{5})(\d)/, '$1-$2')
-      if (form.cep !== formatado) {
-        form.cep = formatado
-      }
-    }
-
-    if (cepLimpo.length === 8) {
-      buscarCep(cepLimpo)
-    }
-  },
-)
-
-const buscarCep = async (cepParam?: string) => {
-  const cep = typeof cepParam === 'string' ? cepParam : form.cep.replace(/\D/g, '')
-  if (cep.length !== 8 || buscandoCep.value) return
-
-  buscandoCep.value = true
-  try {
-    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
-    const data = await response.json()
-
-    if (data.erro) {
-      alert('CEP não encontrado.')
-      return
-    }
-
-    form.rua = data.logradouro || ''
-    form.bairro = data.bairro || ''
-    form.cidade = data.localidade || ''
-    form.estado = data.uf || ''
-  } catch (error) {
-    console.error('Erro ao buscar CEP:', error)
-    alert('Não foi possível consultar o CEP no momento.')
-  } finally {
-    buscandoCep.value = false
-  }
+const irPara = (rota: string) => {
+  router.push(rota)
 }
 
-onMounted(async () => {
-  try {
-    const [resClientes, resVendedores, resEquipes] = await Promise.all([
-      fetch(`${API_URL}/Clientes`),
-      fetch(`${API_URL}/Vendedores`),
-      fetch(`${API_URL}/Equipe`),
-    ])
+const montarMedidaFormatada = () => {
+  const partes = [form.largura.trim(), form.altura.trim(), form.profundidade.trim()].filter(Boolean)
+  return partes.length > 0 ? partes.join(' × ') : '-'
+}
 
-    if (resClientes.ok) clientes.value = await resClientes.json()
-    if (resVendedores.ok) vendedores.value = await resVendedores.json()
-    if (resEquipes.ok) equipes.value = await resEquipes.json()
-  } catch (error) {
-    console.warn(
-      'Verifique se a API está rodando em localhost:5006 e se o CORS está habilitado:',
-      error,
-    )
-  }
-})
+const montarObservacaoFormatada = () => {
+  const partes = [form.cor.trim() ? `Cor: ${form.cor.trim()}` : '', form.descricao.trim()].filter(
+    Boolean,
+  )
+  return partes.join(' - ')
+}
 
-const cadastrarObra = async () => {
+const limparFormulario = () => {
+  form.nome = ''
+  form.descricao = ''
+  form.largura = ''
+  form.profundidade = ''
+  form.altura = ''
+  form.cor = ''
+  form.quantidadeNecessaria = null
+}
+
+const cadastrarProduto = async () => {
   salvando.value = true
-
-  const payload = {
-    cep: form.cep.replace(/\D/g, ''),
-    rua: form.rua,
-    numero: form.numero,
-    complemento: form.complemento,
-    bairro: form.bairro,
-    cidade: form.cidade,
-    estado: form.estado,
-    clienteId: form.clienteId,
-    vendedorId: form.vendedorId,
-    equipeId: form.equipeId,
-    prazo: form.prazo,
-    status: form.status,
-    observacoes: form.observacoes,
-    produtos: produtos.value,
-  }
-
   try {
-    const response = await fetch(`${API_URL}/Obras`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    })
-
-    if (!response.ok) {
-      const erroTexto = await response.text()
-      throw new Error(erroTexto || `Erro HTTP: ${response.status}`)
+    const novoItemCatalogo = {
+      id: Date.now(),
+      nome: form.nome.trim(),
+      descricao: form.descricao.trim(),
+      largura: form.largura.trim(),
+      profundidade: form.profundidade.trim(),
+      altura: form.altura.trim(),
+      cor: form.cor.trim(),
+      quantidadeNecessaria: Number(form.quantidadeNecessaria),
+      medidasPadrao: montarMedidaFormatada(),
+      observacoesPadrao: montarObservacaoFormatada(),
     }
 
-    const data = await response.json()
-    alert('Obra cadastrada com sucesso!')
-    console.log('Resposta do servidor:', data)
+    const existentesRaw = localStorage.getItem(STORAGE_PRODUTOS_KEY)
+    const listaAtual = existentesRaw ? JSON.parse(existentesRaw) : []
+    listaAtual.push(novoItemCatalogo)
+    localStorage.setItem(STORAGE_PRODUTOS_KEY, JSON.stringify(listaAtual))
+
+    alert('Produto cadastrado com sucesso!')
+    limparFormulario()
+    router.push('/')
   } catch (error: any) {
-    console.error('Erro ao cadastrar obra:', error)
-    alert(error.message || 'Erro ao conectar com a API em localhost:5006.')
+    console.error('Erro ao cadastrar produto:', error)
+    alert(error.message || 'Erro ao cadastrar produto.')
   } finally {
     salvando.value = false
   }
 }
 
-const abrirModal = (tipo: string) => {
-  if (tipo === 'cliente') {
-    modalClienteAberto.value = true
-  } else if (tipo === 'vendedor') {
-    modalVendedorAberto.value = true
-  } else if (tipo === 'equipe') {
-    modalEquipeAberto.value = true
-  }
-}
-
-const aoSalvarCliente = (novoCliente: SelectOption) => {
-  clientes.value.push(novoCliente)
-  form.clienteId = novoCliente.id
-}
-
-const aoSalvarVendedor = (novoVendedor: SelectOption) => {
-  vendedores.value.push(novoVendedor)
-  form.vendedorId = novoVendedor.id
-}
-
-const aoSalvarEquipe = (novaEquipe: SelectOption) => {
-  equipes.value.push(novaEquipe)
-  form.equipeId = novaEquipe.id
-}
-
-const adicionarProduto = () => {
-  produtos.value.push({
-    id: Date.now(),
-    nome: 'Janela',
-    quantidade: 2,
-    medidas: '1,2 × 1,5',
-    observacoes: 'Vidro temperado',
-    ativo: true,
-  })
-}
-
-const editarProduto = (id: number) => {
-  const item = produtos.value.find((p) => p.id === id)
-  if (item) {
-    alert(`Editando produto: ${item.nome}`)
-  }
-}
-
-const desativarProduto = (id: number) => {
-  const item = produtos.value.find((p) => p.id === id)
-  if (item) {
-    item.ativo = false
-  }
-}
-
 const cancelar = () => {
-  if (confirm('Deseja limpar o formulário?')) {
-    form.cep = ''
-    form.rua = ''
-    form.numero = ''
-    form.complemento = ''
-    form.bairro = ''
-    form.cidade = ''
-    form.estado = ''
-    form.clienteId = ''
-    form.vendedorId = ''
-    form.equipeId = ''
-    form.prazo = ''
-    form.status = 'Andamento'
-    form.observacoes = ''
-    produtos.value = []
-  }
+  router.push('/')
 }
 </script>
 
@@ -616,18 +281,28 @@ const cancelar = () => {
   flex: 1;
   width: 100%;
   height: 100vh;
-  padding: 24px 48px 0 48px;
+  padding: 32px 56px 0 56px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
+.page-header {
+  margin-bottom: 24px;
+  flex-shrink: 0;
+}
+
 .page-title {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
   color: #0f172a;
-  margin: 0 0 18px 0;
-  flex-shrink: 0;
+  margin: 0 0 4px 0;
+}
+
+.page-subtitle {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
 }
 
 .form-wrapper {
@@ -641,63 +316,33 @@ const cancelar = () => {
   flex: 1;
   overflow-y: auto;
   padding-right: 6px;
-  padding-bottom: 16px;
+  padding-bottom: 20px;
 }
 
-.form-section {
-  margin-bottom: 18px;
-}
-
-.section-header {
+.measures-section {
   display: flex;
-  align-items: center;
-  margin-bottom: 12px;
+  flex-direction: column;
 }
 
-.section-title {
+.section-label {
   font-size: 15px;
-  font-weight: 600;
-  color: #1e293b;
-  margin: 0;
-  white-space: nowrap;
-  padding-bottom: 2px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 12px 0;
 }
 
-.section-title.active-underline {
-  border-bottom: 2px solid #0284c7;
-}
-
-.section-line {
-  flex: 1;
-  height: 1px;
-  background-color: #475569;
-  margin-left: 14px;
-}
-
-.grid-row-4 {
+.grid-row-2 {
   display: grid;
-  grid-template-columns: 1.2fr 1.6fr 0.7fr 1.1fr;
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
 }
 
-.grid-row-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.grid-row-prazo-status {
-  display: grid;
-  grid-template-columns: 1.4fr 0.8fr 1fr;
-  gap: 20px;
+.mt-3 {
+  margin-top: 14px;
 }
 
 .mt-4 {
-  margin-top: 12px;
-}
-
-.ml-4 {
-  margin-left: 16px;
+  margin-top: 18px;
 }
 
 .form-group {
@@ -705,227 +350,96 @@ const cancelar = () => {
   flex-direction: column;
 }
 
-.form-group label {
+.form-group > label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.measures-section .form-group > label {
   font-size: 13px;
-  font-weight: 600;
-  color: #475569;
-  margin-bottom: 5px;
+  font-weight: 700;
 }
 
 input,
-select,
 textarea {
   width: 100%;
-  border: 1px solid #d1d5db;
+  border: 1px solid #cbd5e1;
   border-radius: 6px;
-  padding: 8px 12px;
+  padding: 10px 14px;
   font-size: 13px;
   color: #1e293b;
   background-color: #ffffff;
   outline: none;
-  transition: border-color 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 96px;
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: #cbd5e1;
-}
-
-select {
-  color: #64748b;
+  color: #94a3b8;
 }
 
 input:focus,
-select:focus,
 textarea:focus {
-  border-color: #1d4ed8;
+  border-color: #0284c7;
+  box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
 }
 
-.input-with-icon {
+.input-with-suffix {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.input-with-icon input {
-  padding-right: 36px;
+.input-with-suffix input {
+  padding-right: 84px;
 }
 
-.icon-btn {
+.input-suffix {
   position: absolute;
-  right: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-.input-with-left-icon {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.input-with-left-icon .left-icon {
-  position: absolute;
-  left: 12px;
-  pointer-events: none;
-}
-
-.input-with-left-icon input {
-  padding-left: 36px;
-}
-
-.textarea-wrapper {
-  position: relative;
-}
-
-.textarea-icon {
-  position: absolute;
-  top: 10px;
-  left: 12px;
-  pointer-events: none;
-}
-
-.textarea-wrapper textarea {
-  padding-left: 36px;
-  resize: vertical;
-}
-
-.select-with-action {
-  display: flex;
-  gap: 8px;
-}
-
-.btn-outline-blue {
-  background-color: #ffffff;
-  color: #1e3a8a;
-  border: 1px solid #1e3a8a;
-  border-radius: 6px;
-  padding: 0 14px;
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-outline-blue:hover {
-  background-color: #eff6ff;
-}
-
-.btn-primary-blue {
-  background-color: #1e3a8a;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 16px;
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.btn-primary-blue:hover {
-  background-color: #172554;
-}
-
-.table-container {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  overflow: hidden;
-  min-height: 105px;
-}
-
-.products-table {
-  width: 100%;
-  border-collapse: collapse;
+  right: 14px;
   font-size: 13px;
+  color: #64748b;
+  pointer-events: none;
 }
 
-.products-table thead {
-  background-color: #d9d9d9;
-  color: #475569;
-}
-
-.products-table th {
-  padding: 10px 16px;
-  font-weight: 600;
-  text-align: left;
-}
-
-.products-table td {
-  padding: 12px 16px;
-  color: #334155;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.text-center {
-  text-align: center !important;
-}
-
-.actions-cell {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.action-edit {
-  background: none;
-  border: none;
-  color: #475569;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.action-edit:hover {
-  text-decoration: underline;
-}
-
-.action-delete {
-  background: none;
-  border: none;
-  color: #dc2626;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.action-delete:hover {
-  text-decoration: underline;
-}
-
-.empty-row {
-  text-align: center;
-  color: #94a3b8;
-  padding: 24px !important;
+.helper-text {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 5px;
 }
 
 .form-footer {
   display: flex;
   justify-content: flex-end;
-  gap: 14px;
-  padding: 14px 0 20px 0;
+  gap: 12px;
+  padding: 16px 0 24px 0;
   background-color: #f8f9fa;
-  border-top: 1px solid #e2e8f0;
   flex-shrink: 0;
 }
 
 .btn-cancel {
-  background-color: #ffffff;
-  color: #1e3a8a;
-  border: 1px solid #1e3a8a;
+  background-color: #787878;
+  color: #ffffff;
+  border: none;
   border-radius: 6px;
-  padding: 8px 24px;
+  padding: 9px 28px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .btn-cancel:hover {
-  background-color: #f8fafc;
+  background-color: #646464;
 }
 
 .btn-submit {
@@ -933,10 +447,11 @@ textarea:focus {
   color: #ffffff;
   border: none;
   border-radius: 6px;
-  padding: 8px 26px;
+  padding: 9px 28px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .btn-submit:hover {
@@ -949,12 +464,12 @@ textarea:focus {
   cursor: not-allowed;
 }
 
-@media (max-width: 1024px) {
-  .grid-row-4,
-  .grid-row-3,
-  .grid-row-prazo-status {
+@media (max-width: 900px) {
+  .grid-row-2 {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
+
   .main-content {
     padding: 24px 24px 0 24px;
   }

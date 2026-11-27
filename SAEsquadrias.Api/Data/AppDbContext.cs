@@ -20,7 +20,6 @@ namespace SAEsquadrias.Api.Data
 
         public DbSet<RegistroCampo> RegistrosCampo => Set<RegistroCampo>();
 
-        public DbSet<Usuario>Usuarios => Set<Usuario>();
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
