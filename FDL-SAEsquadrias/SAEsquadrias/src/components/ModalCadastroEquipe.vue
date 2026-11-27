@@ -143,6 +143,8 @@ const salvarEquipe = async () => {
   position: relative;
   width: 100%;
   max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
   background-color: #ffffff;
   border-radius: 16px;
   padding: 44px 48px 40px 48px;
@@ -240,6 +242,7 @@ input:focus {
 .btn-submit {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   background-color: #1e3a8a;
   color: #ffffff;
@@ -260,5 +263,44 @@ input:focus {
 .btn-cancel:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .modal-backdrop {
+    padding: 12px;
+  }
+
+  .modal-card {
+    padding: 36px 20px 24px 20px;
+    border-radius: 14px;
+  }
+
+  .close-btn {
+    top: 14px;
+    right: 14px;
+  }
+
+  .modal-title {
+    font-size: 21px;
+    margin-bottom: 24px;
+  }
+
+  .modal-form {
+    gap: 16px;
+  }
+
+  .modal-footer {
+    flex-direction: column-reverse;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .btn-cancel,
+  .btn-submit {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    justify-content: center;
+  }
 }
 </style>

@@ -1,44 +1,9 @@
 <template>
   <div class="app-container">
-    <aside class="sidebar">
-      <div class="logo-container">
-        <img src="@/assets/logoSA.png" alt="SA Esquadrias" class="logo-img" />
-      </div>
-
-      <nav class="sidebar-nav">
-        <button type="button" class="nav-item active" title="Início">
-          <Home :size="20" />
-        </button>
-
-        <button type="button" class="nav-item" title="Agenda">
-          <Calendar :size="20" />
-        </button>
-
-        <button
-          type="button"
-          class="nav-item"
-          title="Cadastrar Produto"
-          @click="irPara('/cadastro-produtos')"
-        >
-          <Wrench :size="20" />
-        </button>
-
-        <button type="button" class="nav-item" title="Ordens / Checklists">
-          <ClipboardList :size="20" />
-        </button>
-
-        <button type="button" class="nav-item" title="Clientes e Equipes">
-          <Users :size="20" />
-        </button>
-
-        <button type="button" class="nav-item" title="Relatórios">
-          <FileText :size="20" />
-        </button>
-      </nav>
-    </aside>
+    <AppSidebar />
 
     <main class="main-content">
-      <h1 class="page-title">Cadastro de Obras</h1>
+      <h1 class="page-title">{{ isEdicao ? 'Editar Obra' : 'Cadastro de Obras' }}</h1>
 
       <form @submit.prevent="cadastrarObra" class="form-wrapper">
         <div class="form-scroll-area">
@@ -173,8 +138,13 @@
               <div class="form-group">
                 <label>Status *</label>
                 <select v-model="form.status" required>
+                  <option value="Aguardando liberação">Aguardando liberação</option>
                   <option value="Andamento">Andamento</option>
+                  <option value="Em produção">Em produção</option>
+                  <option value="Em instalação">Em instalação</option>
+                  <option value="Com pendência">Com pendência</option>
                   <option value="Pendente">Pendente</option>
+                  <option value="Finalizado">Finalizado</option>
                   <option value="Concluído">Concluído</option>
                 </select>
               </div>
@@ -194,10 +164,12 @@
           </section>
 
           <section class="form-section">
-            <div class="section-header">
-              <h2 class="section-title">Produtos utilizados</h2>
-              <div class="section-line"></div>
-              <div class="header-actions ml-4">
+            <div class="section-header products-header">
+              <div class="section-title-group">
+                <h2 class="section-title">Produtos utilizados</h2>
+                <div class="section-line"></div>
+              </div>
+              <div class="header-actions">
                 <button
                   type="button"
                   class="btn-outline-blue btn-header-height"
@@ -316,7 +288,15 @@
             Cancelar
           </button>
           <button type="submit" class="btn-submit" :disabled="salvando">
-            {{ salvando ? 'Cadastrando...' : 'Cadastrar' }}
+            {{
+              salvando
+                ? isEdicao
+                  ? 'Salvando...'
+                  : 'Cadastrando...'
+                : isEdicao
+                  ? 'Salvar Alterações'
+                  : 'Cadastrar'
+            }}
           </button>
         </div>
       </form>
@@ -343,8 +323,9 @@
 </template>
 
 <script setup lang="ts">
+import AppSidebar from '@/components/AppSidebar.vue'
 import { reactive, ref, computed, watch, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { Home, Calendar, Wrench, ClipboardList, Users, FileText, Search } from 'lucide-vue-next'
 import ModalCadastroCliente from '@/components/ModalCadastroCliente.vue'
 import ModalCadastroVendedor from '@/components/ModalCadastroVendedor.vue'
@@ -352,8 +333,14 @@ import ModalCadastroEquipe from '@/components/ModalCadastroEquipe.vue'
 
 const API_URL = 'http://localhost:5006/api'
 const STORAGE_PRODUTOS_KEY = 'sa_esquadrias_catalogo_produtos'
+const STORAGE_OBRAS_EDITADAS_KEY = 'sa_esquadrias_obras_editadas'
 
+const route = useRoute()
 const router = useRouter()
+
+const isEdicao = computed(() => Boolean(route.params.id))
+const obraIdEdicao = computed(() => String(route.params.id ?? ''))
+const carregandoDadosEdicao = ref(false)
 
 interface SelectOption {
   id: number | string
@@ -479,7 +466,7 @@ watch(
       }
     }
 
-    if (cepLimpo.length === 8) {
+    if (cepLimpo.length === 8 && !carregandoDadosEdicao.value) {
       buscarCep(cepLimpo)
     }
   },
@@ -509,6 +496,187 @@ const buscarCep = async (cepParam?: string) => {
   } finally {
     buscandoCep.value = false
   }
+}
+
+const carregarDadosParaEdicao = async (id: string) => {
+  carregandoDadosEdicao.value = true
+
+  // Garante opções mínimas caso a API esteja offline
+  if (clientes.value.length === 0) {
+    clientes.value = [
+      { id: 1, nome: 'João Galindo' },
+      { id: 2, nome: 'Edificio Central' },
+      { id: 3, nome: 'Cond. Por do sol' },
+      { id: 4, nome: 'Residencial Jardim' },
+    ]
+  }
+  if (vendedores.value.length === 0) {
+    vendedores.value = [
+      { id: 1, nome: 'Ana Carolina' },
+      { id: 2, nome: 'Geovanna' },
+      { id: 3, nome: 'Yasmin' },
+    ]
+  }
+  if (equipes.value.length === 0) {
+    equipes.value = [{ id: 1, nome: 'Equipe Alfa' }]
+  }
+
+  const mocksEdicao: Record<string, any> = {
+    '15': {
+      cep: '17500-000',
+      rua: 'Rua das Flores',
+      numero: '123',
+      complemento: '',
+      bairro: 'Centro',
+      cidade: 'Marília',
+      estado: 'SP',
+      clienteId: clientes.value[0]?.id ?? 1,
+      vendedorId: vendedores.value[0]?.id ?? 1,
+      equipeId: equipes.value[0]?.id ?? 1,
+      prazo: '2026-12-15',
+      status: 'Aguardando liberação',
+      observacoes: 'Condomínio em fase da acabamento',
+      produtos: [
+        {
+          id: 1,
+          nome: 'Porta',
+          quantidade: 1,
+          medidas: '2,10 × 1,00',
+          observacoes: 'Sala',
+          ativo: true,
+        },
+      ],
+    },
+    '18': {
+      cep: '17501-010',
+      rua: 'Av. Principal',
+      numero: '456',
+      complemento: '',
+      bairro: 'Centro',
+      cidade: 'Marília',
+      estado: 'SP',
+      clienteId: clientes.value[1]?.id ?? 2,
+      vendedorId: vendedores.value[0]?.id ?? 1,
+      equipeId: equipes.value[0]?.id ?? 1,
+      prazo: '2026-12-20',
+      status: 'Com pendência',
+      observacoes: 'Aguardando confirmação de medidas do vão principal',
+      produtos: [
+        {
+          id: 2,
+          nome: 'Janela',
+          quantidade: 2,
+          medidas: '1,50 × 1,20',
+          observacoes: 'Vidro temperado',
+          ativo: true,
+        },
+      ],
+    },
+    '20': {
+      cep: '17502-020',
+      rua: 'Rua do Sol',
+      numero: '120',
+      complemento: '',
+      bairro: 'Jardim',
+      cidade: 'Marília',
+      estado: 'SP',
+      clienteId: clientes.value[2]?.id ?? 3,
+      vendedorId: vendedores.value[0]?.id ?? 1,
+      equipeId: equipes.value[0]?.id ?? 1,
+      prazo: '2026-12-25',
+      status: 'Em produção',
+      observacoes: 'Corte de perfis em andamento na fábrica',
+      produtos: [
+        {
+          id: 3,
+          nome: 'Portão',
+          quantidade: 1,
+          medidas: '2,40 × 3,20',
+          observacoes: 'Automático',
+          ativo: true,
+        },
+      ],
+    },
+    '30': {
+      cep: '17503-030',
+      rua: 'Rua Babuino',
+      numero: '222',
+      complemento: '',
+      bairro: 'Bela Vista',
+      cidade: 'Marília',
+      estado: 'SP',
+      clienteId: clientes.value[3]?.id ?? 4,
+      vendedorId: vendedores.value[1]?.id ?? 2,
+      equipeId: equipes.value[0]?.id ?? 1,
+      prazo: '2026-12-30',
+      status: 'Em instalação',
+      observacoes: 'Equipe externa agendada no período da manhã',
+      produtos: [
+        {
+          id: 4,
+          nome: 'Box',
+          quantidade: 1,
+          medidas: '1,90 × 1,30',
+          observacoes: 'Incolor 8mm',
+          ativo: true,
+        },
+      ],
+    },
+  }
+
+  let dadosObra = mocksEdicao[id] || mocksEdicao['15']
+
+  try {
+    const res = await fetch(`${API_URL}/Obras/${id}`)
+    if (res.ok) {
+      dadosObra = await res.json()
+    }
+  } catch {
+    // Usa dados locais caso a API não esteja acessível
+  }
+
+  // Sobrepõe com edição local anterior, se houver
+  try {
+    const editadasRaw = localStorage.getItem(STORAGE_OBRAS_EDITADAS_KEY)
+    if (editadasRaw) {
+      const mapa = JSON.parse(editadasRaw)
+      if (mapa[id]) {
+        dadosObra = { ...dadosObra, ...mapa[id] }
+      }
+    }
+  } catch {
+    // ignora
+  }
+
+  form.cep = dadosObra.cep ?? ''
+  form.rua = dadosObra.rua ?? ''
+  form.numero = dadosObra.numero ?? ''
+  form.complemento = dadosObra.complemento ?? ''
+  form.bairro = dadosObra.bairro ?? ''
+  form.cidade = dadosObra.cidade ?? ''
+  form.estado = dadosObra.estado ?? ''
+  form.clienteId = dadosObra.clienteId ?? dadosObra.cliente?.id ?? ''
+  form.vendedorId = dadosObra.vendedorId ?? dadosObra.vendedor?.id ?? ''
+  form.equipeId = dadosObra.equipeId ?? dadosObra.equipe?.id ?? ''
+  form.prazo = dadosObra.prazo ? String(dadosObra.prazo).slice(0, 10) : ''
+  form.status = dadosObra.status ?? 'Andamento'
+  form.observacoes = dadosObra.observacoes ?? ''
+
+  if (Array.isArray(dadosObra.produtos)) {
+    produtos.value = dadosObra.produtos.map((p: any, i: number) => ({
+      id: p.id ?? Date.now() + i,
+      nome: p.nome ?? '',
+      quantidade: p.quantidade ?? 1,
+      medidas: p.medidas ?? '',
+      observacoes: p.observacoes ?? '',
+      ativo: p.ativo !== false,
+      editando: false,
+    }))
+  }
+
+  setTimeout(() => {
+    carregandoDadosEdicao.value = false
+  }, 100)
 }
 
 onMounted(async () => {
@@ -542,6 +710,10 @@ onMounted(async () => {
       error,
     )
   }
+
+  if (isEdicao.value) {
+    await carregarDadosParaEdicao(obraIdEdicao.value)
+  }
 })
 
 const aoSelecionarProduto = (item: ProdutoItem) => {
@@ -557,13 +729,14 @@ const aoSelecionarProduto = (item: ProdutoItem) => {
 const cadastrarObra = async () => {
   const linhaEmEdicao = produtosAtivos.value.find((p) => p.editando)
   if (linhaEmEdicao) {
-    alert('Salve ou exclua o produto que está em edição antes de cadastrar a obra.')
+    alert('Salve ou exclua o produto que está em edição antes de salvar a obra.')
     return
   }
 
   salvando.value = true
 
   const payload = {
+    ...(isEdicao.value ? { id: Number(obraIdEdicao.value) || obraIdEdicao.value } : {}),
     cep: form.cep.replace(/\D/g, ''),
     rua: form.rua,
     numero: form.numero,
@@ -577,7 +750,46 @@ const cadastrarObra = async () => {
     prazo: form.prazo,
     status: form.status,
     observacoes: form.observacoes,
+    ativo: true,
     produtos: produtosAtivos.value.map(({ editando, ...resto }) => resto),
+  }
+
+  if (isEdicao.value) {
+    const clienteObj = clientes.value.find((c) => String(c.id) === String(form.clienteId))
+    const vendedorObj = vendedores.value.find((v) => String(v.id) === String(form.vendedorId))
+
+    try {
+      const editadasRaw = localStorage.getItem(STORAGE_OBRAS_EDITADAS_KEY)
+      const mapa = editadasRaw ? JSON.parse(editadasRaw) : {}
+      mapa[obraIdEdicao.value] = {
+        ...payload,
+        cep: form.cep,
+        clienteNome: clienteObj?.nome,
+        vendedor: vendedorObj?.nome,
+      }
+      localStorage.setItem(STORAGE_OBRAS_EDITADAS_KEY, JSON.stringify(mapa))
+    } catch {
+      // ignora
+    }
+
+    try {
+      const response = await fetch(`${API_URL}/Obras/${obraIdEdicao.value}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      if (!response.ok) {
+        console.warn(`PUT retornou HTTP ${response.status}; alterações salvas localmente.`)
+      }
+    } catch (error) {
+      console.warn('API indisponível; alterações salvas localmente.', error)
+    } finally {
+      salvando.value = false
+      alert('Alterações salvas com sucesso!')
+      router.push(`/obras/${obraIdEdicao.value}`)
+    }
+    return
   }
 
   try {
@@ -597,6 +809,7 @@ const cadastrarObra = async () => {
     const data = await response.json()
     alert('Obra cadastrada com sucesso!')
     console.log('Resposta do servidor:', data)
+    router.push('/obras')
   } catch (error: any) {
     console.error('Erro ao cadastrar obra:', error)
     alert(error.message || 'Erro ao conectar com a API em localhost:5006.')
@@ -678,21 +891,10 @@ const desativarProduto = (id: number) => {
 }
 
 const cancelar = () => {
-  if (confirm('Deseja limpar o formulário?')) {
-    form.cep = ''
-    form.rua = ''
-    form.numero = ''
-    form.complemento = ''
-    form.bairro = ''
-    form.cidade = ''
-    form.estado = ''
-    form.clienteId = ''
-    form.vendedorId = ''
-    form.equipeId = ''
-    form.prazo = ''
-    form.status = 'Andamento'
-    form.observacoes = ''
-    produtos.value = []
+  if (isEdicao.value) {
+    router.push(`/obras/${obraIdEdicao.value}`)
+  } else {
+    router.push('/obras')
   }
 }
 </script>
@@ -724,6 +926,7 @@ const cancelar = () => {
   align-items: center;
   padding-top: 24px;
   flex-shrink: 0;
+  z-index: 30;
 }
 
 .logo-container {
@@ -807,6 +1010,12 @@ const cancelar = () => {
   margin-bottom: 12px;
 }
 
+.section-title-group {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
 .section-title {
   font-size: 15px;
   font-weight: 600;
@@ -831,6 +1040,7 @@ const cancelar = () => {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-left: 16px;
 }
 
 .btn-header-height {
@@ -857,10 +1067,6 @@ const cancelar = () => {
 
 .mt-4 {
   margin-top: 12px;
-}
-
-.ml-4 {
-  margin-left: 16px;
 }
 
 .form-group {
@@ -1004,12 +1210,13 @@ textarea:focus {
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  overflow: hidden;
+  overflow-x: auto;
   min-height: 105px;
 }
 
 .products-table {
   width: 100%;
+  min-width: 600px;
   border-collapse: collapse;
   font-size: 13px;
 }
@@ -1137,9 +1344,108 @@ textarea:focus {
   .grid-row-3,
   .grid-row-prazo-status {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
+
   .main-content {
-    padding: 24px 24px 0 24px;
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    display: block;
+    height: 100dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 60px;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0 12px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+    z-index: 40;
+  }
+
+  .logo-container {
+    display: none;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 4px;
+  }
+
+  .main-content {
+    display: block;
+    height: auto;
+    min-height: 100dvh;
+    padding: 20px 16px 96px 16px;
+    overflow: visible;
+  }
+
+  .page-title {
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+
+  .form-wrapper,
+  .form-scroll-area {
+    display: block;
+    height: auto;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .products-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .header-actions {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .header-actions button {
+    flex: 1;
+    height: 36px;
+    justify-content: center;
+  }
+
+  .select-with-action {
+    flex-wrap: wrap;
+  }
+
+  .select-with-action select {
+    flex: 1;
+    min-width: 160px;
+  }
+
+  .select-with-action .btn-outline-blue {
+    height: 36px;
+  }
+
+  .form-footer {
+    flex-direction: column-reverse;
+    gap: 10px;
+    padding: 16px 0 12px 0;
+  }
+
+  .btn-cancel,
+  .btn-submit {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
   }
 }
 </style>

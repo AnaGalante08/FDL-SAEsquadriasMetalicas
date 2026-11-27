@@ -1,36 +1,6 @@
 <template>
   <div class="app-container">
-    <aside class="sidebar">
-      <div class="logo-container">
-        <img src="@/assets/logoSA.png" alt="SA Esquadrias" class="logo-img" />
-      </div>
-
-      <nav class="sidebar-nav">
-        <button type="button" class="nav-item" title="Início" @click="irPara('/')">
-          <Home :size="20" />
-        </button>
-
-        <button type="button" class="nav-item" title="Agenda">
-          <Calendar :size="20" />
-        </button>
-
-        <button type="button" class="nav-item active" title="Obras e Produtos">
-          <Wrench :size="20" />
-        </button>
-
-        <button type="button" class="nav-item" title="Ordens / Checklists">
-          <ClipboardList :size="20" />
-        </button>
-
-        <button type="button" class="nav-item" title="Clientes e Equipes">
-          <Users :size="20" />
-        </button>
-
-        <button type="button" class="nav-item" title="Relatórios">
-          <FileText :size="20" />
-        </button>
-      </nav>
-    </aside>
+    <AppSidebar />
 
     <main class="main-content">
       <header class="page-header">
@@ -127,13 +97,12 @@
 </template>
 
 <script setup lang="ts">
+import AppSidebar from '@/components/AppSidebar.vue'
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { Home, Calendar, Wrench, ClipboardList, Users, FileText } from 'lucide-vue-next'
 
 const STORAGE_PRODUTOS_KEY = 'sa_esquadrias_catalogo_produtos'
-// Caso crie o controller no backend, descomente e use a URL abaixo:
-// const API_URL = 'http://localhost:5006/api/Produtos'
 
 const router = useRouter()
 const salvando = ref(false)
@@ -197,11 +166,7 @@ const cadastrarProduto = async () => {
 
     alert('Produto cadastrado com sucesso!')
     limparFormulario()
-
-    // Se veio da tela de obras, volta para lá automaticamente
-    if (window.history.length > 1) {
-      router.back()
-    }
+    router.push('/cadastro-obras')
   } catch (error: any) {
     console.error('Erro ao cadastrar produto:', error)
     alert(error.message || 'Erro ao cadastrar produto.')
@@ -211,11 +176,7 @@ const cadastrarProduto = async () => {
 }
 
 const cancelar = () => {
-  if (window.history.length > 1) {
-    router.back()
-  } else {
-    limparFormulario()
-  }
+  router.push('/cadastro-obras')
 }
 </script>
 
@@ -246,6 +207,7 @@ const cancelar = () => {
   align-items: center;
   padding-top: 24px;
   flex-shrink: 0;
+  z-index: 30;
 }
 
 .logo-container {
@@ -482,6 +444,71 @@ textarea:focus {
 
   .main-content {
     padding: 24px 24px 0 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 60px;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0 12px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .logo-container {
+    display: none;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 4px;
+  }
+
+  .main-content {
+    height: auto;
+    min-height: 100vh;
+    padding: 20px 16px 84px 16px;
+    overflow: visible;
+  }
+
+  .page-header {
+    margin-bottom: 18px;
+  }
+
+  .page-title {
+    font-size: 22px;
+  }
+
+  .form-scroll-area {
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .form-footer {
+    flex-direction: column-reverse;
+    gap: 10px;
+    padding: 16px 0 8px 0;
+  }
+
+  .btn-cancel,
+  .btn-submit {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
   }
 }
 </style>
