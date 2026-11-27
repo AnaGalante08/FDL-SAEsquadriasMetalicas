@@ -113,6 +113,14 @@ namespace SAEsquadrias.Api.Migrations
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)");
 
+                    b.Property<int>("QuantidadeIntegrantes")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Responsavel")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Equipes");
