@@ -14,6 +14,9 @@ namespace SAEsquadrias.Api.Data
         public DbSet<Obra> Obras { get; set; }
         public DbSet<ItemObra> ItensObras { get; set; }
         public DbSet<Pendencia> Pendencias { get; set; }
+        public DbSet<Equipe> Equipes { get; set; }
+        public DbSet<Usuario>   Usuarios { get; set; }
+        public DbSet<ListaObra> ListaObras { get; set; }
 
         public DbSet<RegistroCampo> RegistrosCampo => Set<RegistroCampo>();
 
